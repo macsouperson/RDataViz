@@ -1,3 +1,4 @@
+Political Data  - Visualiazations in R
 | | | | 
 |:-------------------------|:-------------------------:|-------------------------:|
 |<img width="2560" alt="screen shot 2017-08-07 at 12 18 15 pm" src="images/Party Affiliation.png">  Party Affiliation | <img width="2560" alt="screen shot 2017-08-07 at 12 18 15 pm" src="images/UnionSentiment.png"> Sentiment Towards Democratic Party Among Union Members
