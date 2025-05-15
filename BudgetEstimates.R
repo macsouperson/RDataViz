@@ -3,7 +3,7 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 
-load("PubPol4557Session19Lab.Rdata")
+load("BudgetData.Rdata")
 
 #Question 1: Show observed deficits and the CBO's projection of future deficits.
 ##including the "2/3 of possible outcomes" range.
@@ -32,8 +32,10 @@ confgraph <- ggplot(data=DEFICITS) +
                     ymin = defmean - 1.96 * AdminRMSE,
                     ymax = defmean + 1.96 * AdminRMSE)) +
   labs(x="Fiscal Year", y="Observed/Estimated deficits",
-       title="Observed/Estimated Budget Deficits 2016-27")
+       title="Observed/Estimated Budget Deficits 2016-27") +
+  scale_x_date(date_breaks = "2 years", date_labels = '%Y')
 confgraph
+ggsave("images/estimatedbudget.png")
 
 #Question 3: Show both the CBO and OMB projection of future deficits
 ##but with similar uncertainty ranges around each projection.
@@ -49,8 +51,11 @@ bothgraph <- ggplot(data=DEFICITS) +
                   ymin=CBOMayEstAdj - 1*AdminRMSE,
                   ymax=CBOMayEstAdj + 1*AdminRMSE),
               fill = "red",alpha=0.6) +
-  labs(x="Fiscal Year", y="Observed/Estimated budget surpluses/deficits",
-       title="OMB & CBO Observed/Estimated budget surpluses/deficits 2016-27")
+  labs(x="Fiscal Year", y="Observed/Estimated budget deficits",
+       title="Observed/Estimated budget deficits 2016-27",
+       caption = "Source: OMB and CBO") +
+  scale_x_date(date_breaks = "1 year", date_labels = '%Y')
 bothgraph
+ggsave("images/estimatedbudget.png")
 
 

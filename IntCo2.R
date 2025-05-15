@@ -3,7 +3,7 @@ library(ggplot2)
 library(tidyr)
 library(lubridate)
 
-load("PubPol4557Session17Lab.Rdata")
+load("CO2Data.Rdata")
 
 #Part 2
 WDI$Year <- ymd(WDI$Time, truncated = 2L)
@@ -12,16 +12,17 @@ WDI$Year <- ymd(WDI$Time, truncated = 2L)
 co2graph <- ggplot(data=WDI) +
   geom_line(aes(x=Year,y=CO2percap,color=factor(CountryName))) +
   facet_wrap(~Group, nrow=2) +
-  labs(x="Year",y="CO2 per Capita",title="Co2 per capita BRICS vs. G7", color="Country Name")
+  labs(x="Year",y="CO2 per Capita",
+       title="Per capita Co2 BRICS vs. G7 Countries", color="Country Name") +
+  scale_x_date(date_breaks = "3 years", date_labels = '%Y')
 co2graph
-
+ggsave("images/co2emission.png")
 #Question 2, How did GDP change over the sample period for countries in the sample?
 
 gdpgraph <- ggplot(data=WDI) +
   geom_line(aes(x=Year,y=log(GDPpercap),color=factor(CountryName))) + 
-  labs(x="Year",y="log(GDP)",title="log(GDP) per capita 1990-2020", color="Country Name") +
-  scale_x_date(date_breaks = "5 year")
-
+  labs(x="Year",y="log(GDP)",title="Per capita log(GDP) 1990-2020", color="Country Name") +
+  scale_x_date(date_breaks = "3 years", date_labels = '%Y')
 gdpgraph
 
 #Question 3, How did both GDP and CO2 emissions change over the period of the sample? 

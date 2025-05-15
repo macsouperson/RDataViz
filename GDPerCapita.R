@@ -5,7 +5,7 @@ library(readr)
 library(dplyr)
 library(sf)
 
-load("PubPol4557Session21.Rdata")
+load("GlobalData.Rdata")
 COUNTRIES <- read_sf(dsn="world-administrative-boundaries/world-administrative-boundaries.shp",
                      stringsAsFactors = F)
 

@@ -7,7 +7,7 @@ library(stats)
 library(coefplot)
 library(estimatr)
 
-load("PubPol4557Session22Lab.Rdata")
+load("SentimentData.Rdata")
 
 #Question 1A
 sameparty <- ggplot(data=ANES,aes(y=ft_dem,x=ft_dpc)) +
@@ -18,6 +18,7 @@ sameparty <- ggplot(data=ANES,aes(y=ft_dem,x=ft_dpc)) +
        x="Feelings Towards Candidate (Dem.)",
        title="Feelings Towards Democratic Candidate and Party")
 sameparty
+ggsave('images/demsentiment.png')
 
 #Question 1B
 diffparty <- ggplot(data=ANES,aes(y=ft_dem,x=ft_rpc)) +
@@ -38,6 +39,7 @@ ageparty <- ggplot(data=ANES,aes(y=ft_dem,x=dem_age_r_x)) +
        x="Respondent Age",
        title="Feelings Dem. Party Given Age")
 ageparty
+ggsave('images/demsentimentage.png')
 
 #Question 1D
 unionparty <- ggplot(data=ANES,aes(y=ft_dem,x=ftgr_unions)) +
@@ -49,6 +51,7 @@ unionparty <- ggplot(data=ANES,aes(y=ft_dem,x=ftgr_unions)) +
        x="Feelings Towards Union",
        title="Feelings Dem. Party and Unions")
 unionparty
+ggsave('images/demsentimentunion.png')
 
 #Question 1E
 partyparty <- ggplot(data=ANES,aes(y=ft_dem,x=pid_x)) +

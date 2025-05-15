@@ -1,4 +1,4 @@
-load("PubPol4557Session15Lab.Rdata")
+load("DemographicData.Rdata")
 
 library(ggplot2)
 library(dplyr)
@@ -35,12 +35,15 @@ incomegraph
 # Using the 7-point self-identified Party ID scale (pid_x), what is the distribution of party self-identification of our respondents?
 
 partygraph <- ggplot(data=ANES) +
-  geom_histogram(aes(x=pid_x,fill=factor(pid_x)),bins=7)+
-  labs(x="Party ID") + scale_fill_discrete(labels=c('Strong Democrat','Not very strong Democract',
+  geom_histogram(aes(x=pid_x,fill=factor(pid_x)),bins=7, color='black')+
+  labs(x="Party Affiliation", caption = "Source: ANES") +
+  scale_fill_discrete(labels=c('Strong Democrat','Not very strong Democract',
                                            'Independent-Democrat', 'Independent','Independent-Republican',
-                                           'Not very strong Republican','Strong Republican'))
+                                           'Not very strong Republican','Strong Republican')) +
+  scale_x_continuous(breaks = seq(1,7, by=1))
 partygraph$labels$fill <- "Party Affiliation"
 partygraph
+ggsave('images/Party Affiliation.png')
 
 #Question 4
 # How does the distribution of feelings towards unions (ftgr_unions) compare across respondents identifying with different parties? 
@@ -50,12 +53,15 @@ party_labels <- c("Strong Democrat","Not Strong Democrat",
 party_labeller <-function(variable, value){
   return(party_labels[value])
 }
+ANES <- ANES[!is.na(ANES$ftgr_unions),]
 
 uniongraph <- ggplot(data=ANES) +
   geom_histogram(aes(x=ftgr_unions),breaks=c(0,10,20,30,40,50,
                                               60,70,80,90,100),color="white",fill="blue")+
-  facet_wrap(~pid_x, labeller = party_labeller)
+  facet_wrap(~pid_x, labeller = party_labeller) +
+  labs(x="Union Affiliation")
 uniongraph
+ggsave('images/UnionSentiment.png')
 
 #Question 5
 # Pick one of the feeling thermometers we looked at previously (dpc, rpc, dem, rep) and compare the distribution of responses across Party identification. Do feelings towards a party or candidate vary across self-identified party affiliation?
