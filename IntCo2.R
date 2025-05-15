@@ -11,8 +11,8 @@ WDI$Year <- ymd(WDI$Time, truncated = 2L)
 #Question 1, How did CO2 emissions change over time for the countries in the sample?
 co2graph <- ggplot(data=WDI) +
   geom_line(aes(x=Year,y=CO2percap,color=factor(CountryName))) +
-  facet_wrap(~Group) +
-  labs(x="Year",y="CO2 per Capita",title="Co2 per capita BRICS vs. G7")
+  facet_wrap(~Group, nrow=2) +
+  labs(x="Year",y="CO2 per Capita",title="Co2 per capita BRICS vs. G7", color="Country Name")
 co2graph
 
 #Question 2, How did GDP change over the sample period for countries in the sample?

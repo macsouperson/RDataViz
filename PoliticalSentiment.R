@@ -59,30 +59,3 @@ partyparty <- ggplot(data=ANES,aes(y=ft_dem,x=pid_x)) +
        x="Party ID",
        title="Feelings Dem. Party Given Party ID")
 partyparty
-
-#Question 2
-thermmodel <- lm_robust(ft_dem ~ ft_dpc + ft_rep + dem_age_r_x + ftgr_unions + pid_x,
-                 data = ANES)
-thermmodel
-
-coefplot(thermmodel,title="Therm. Graph")
-
-#Question 3
-mymodel <- lm_robust(ct ~ highT + lowT + precip + clouds + wday + month, 
-              data = RIDERS)
-mymodel
-
-coefplot(mymodel, title="Count of Riders","color.Q")
-
-#Question 4
-clsscmodel <- lm_robust(ct ~ highT + lowT + precip + clouds + wday, 
-            data = RIDERS, se_type="classical")
-robmodel <- lm_robust(ct ~ highT + lowT + precip + clouds + wday, 
-                    data = RIDERS, se_type="stata")
-hc2model <- lm_robust(ct ~ highT + lowT + precip + clouds + wday, 
-                    data = RIDERS, se_type="HC2")
-hc3model <- lm_robust(ct ~ highT + lowT + precip + clouds + wday, 
-                     data = RIDERS, se_type="HC3")
-
-supergraph <- multiplot(clsscmodel,robmodel,hc2model,hc3model)
-supergraph
